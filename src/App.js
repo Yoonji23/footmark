@@ -1,10 +1,11 @@
-import KakaoMap from "./kakoMap";
-import SearchForm from "./SearchForm";
+import Map from "./Map";
+import LandingPage from "./LandingPage";
+
 function App() {
   return (
     <div>
-      <KakaoMap />
-      <SearchForm />
+      <Map />
+      <LandingPage />
     </div>
   );
 }

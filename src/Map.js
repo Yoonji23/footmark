@@ -3,39 +3,45 @@ import React, { useEffect, useState } from "react";
 const { kakao } = window;
 
 const Map = ({ searchPlace }) => {
-  console.log("searchPlace", searchPlace);
   // 검색결과 배열에 담아줌
   const [Places, setPlaces] = useState([]);
 
   useEffect(() => {
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-    var markers = [];
+    // 마커를 저장할 정보창과 배열을 생성합니다.
+    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+    // var markers = [];
+
+    // 지도의 컨테이너를 가져오고 지도의 옵션을 설정합니다.
     const container = document.getElementById("myMap");
     const options = {
       center: new kakao.maps.LatLng(33.450701, 126.570667),
       level: 3,
     };
     const map = new kakao.maps.Map(container, options);
-
+    // 사용자가 검색어를 입력한 경우 장소 객체를 생성하고 키워드 검색을 수행합니다.
     const ps = new kakao.maps.services.Places();
+
     if (searchPlace) {
       ps.keywordSearch(searchPlace, placesSearchCB);
     }
 
+    // 키워드 검색을 위한 콜백 기능
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
+        // 검색 결과를 확대하기 위해 LatLngBounds 객체를 생성합니다.
         let bounds = new kakao.maps.LatLngBounds();
-
+        // 각 검색 결과에 대한 마커를 표시하고 범위를 확장합니다.
         for (let i = 0; i < data.length; i++) {
           displayMarker(data[i]);
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
         }
-
+        // 바운드로 확대 및 페이지 매김 표시
         map.setBounds(bounds);
         // 페이지 목록 보여주는 displayPagination() 추가
         displayPagination(pagination);
+        // 검색 결과로 장소 상태 업데이트
         setPlaces(data);
-        console.log("data", Places);
       }
     }
 
@@ -49,12 +55,13 @@ const Map = ({ searchPlace }) => {
       while (paginationEl.hasChildNodes()) {
         paginationEl.removeChild(paginationEl.lastChild);
       }
-
+      // 각 페이지에 대한 링크 만들기
       for (i = 1; i <= pagination.last; i++) {
         var el = document.createElement("a");
         el.href = "#";
         el.innerHTML = i;
 
+        // 현재 페이지 강조 표시
         if (i === pagination.current) {
           el.className = "on";
         } else {
@@ -70,13 +77,28 @@ const Map = ({ searchPlace }) => {
       paginationEl.appendChild(fragment);
     }
 
+    // 검색 결과에 대한 마커를 표시하는 기능
     function displayMarker(place) {
       let marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(place.y, place.x),
+        title: place.place_name,
       });
-
       kakao.maps.event.addListener(marker, "click", function () {
+        const position = marker.getPosition(); // 위도, 경도
+        const title = marker.getTitle(); //상호명
+        // const latitude = position.getLat();
+        // const longitude = position.getLng();
+        console.log(
+          "position:",
+          position,
+          "title:",
+          title
+          // "latitude",
+          // latitude,
+          // "longitude",
+          // longitude
+        );
         infowindow.setContent(
           '<div style="padding:5px;font-size:12px;">' +
             place.place_name +
@@ -87,6 +109,7 @@ const Map = ({ searchPlace }) => {
     }
   }, [searchPlace]);
 
+  // 지도 및 검색 결과 렌더링
   return (
     <div>
       <div

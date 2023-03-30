@@ -1,10 +1,9 @@
-import Map from "./Map";
+import "./App.css";
 import LandingPage from "./LandingPage";
 
 function App() {
   return (
     <div>
-      <Map />
       <LandingPage />
     </div>
   );

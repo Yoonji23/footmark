@@ -1,5 +1,11 @@
+import "./App.css";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
+const SMap = styled.div`
+  /* display: flex;
+  flex-direction: column; */
+`;
 const { kakao } = window;
 
 const Map = ({ searchPlace }) => {
@@ -22,12 +28,8 @@ const Map = ({ searchPlace }) => {
     // 사용자가 검색어를 입력한 경우 장소 객체를 생성하고 키워드 검색을 수행합니다.
     const ps = new kakao.maps.services.Places();
 
-    if (searchPlace) {
-      ps.keywordSearch(searchPlace, placesSearchCB);
-    }
-
     // 키워드 검색을 위한 콜백 기능
-    function placesSearchCB(data, status, pagination) {
+    const placesSearchCB = (data, status, pagination) => {
       if (status === kakao.maps.services.Status.OK) {
         // 검색 결과를 확대하기 위해 LatLngBounds 객체를 생성합니다.
         let bounds = new kakao.maps.LatLngBounds();
@@ -43,11 +45,15 @@ const Map = ({ searchPlace }) => {
         // 검색 결과로 장소 상태 업데이트
         setPlaces(data);
       }
+    };
+
+    if (searchPlace) {
+      ps.keywordSearch(searchPlace, placesSearchCB);
     }
 
     // 검색결과 목록 하단에 페이지 번호 표시
-    function displayPagination(pagination) {
-      var paginationEl = document.getElementById("pagination"),
+    const displayPagination = (pagination) => {
+      let paginationEl = document.getElementById("pagination"),
         fragment = document.createDocumentFragment(),
         i;
 
@@ -57,7 +63,7 @@ const Map = ({ searchPlace }) => {
       }
       // 각 페이지에 대한 링크 만들기
       for (i = 1; i <= pagination.last; i++) {
-        var el = document.createElement("a");
+        let el = document.createElement("a");
         el.href = "#";
         el.innerHTML = i;
 
@@ -65,8 +71,8 @@ const Map = ({ searchPlace }) => {
         if (i === pagination.current) {
           el.className = "on";
         } else {
-          el.onclick = (function (i) {
-            return function () {
+          el.onclick = ((i) => {
+            return () => {
               pagination.gotoPage(i);
             };
           })(i);
@@ -75,30 +81,19 @@ const Map = ({ searchPlace }) => {
         fragment.appendChild(el);
       }
       paginationEl.appendChild(fragment);
-    }
+    };
 
     // 검색 결과에 대한 마커를 표시하는 기능
-    function displayMarker(place) {
+    const displayMarker = (place) => {
       let marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(place.y, place.x),
         title: place.place_name,
       });
-      kakao.maps.event.addListener(marker, "click", function () {
+      kakao.maps.event.addListener(marker, "click", () => {
         const position = marker.getPosition(); // 위도, 경도
         const title = marker.getTitle(); //상호명
-        // const latitude = position.getLat();
-        // const longitude = position.getLng();
-        console.log(
-          "position:",
-          position,
-          "title:",
-          title
-          // "latitude",
-          // latitude,
-          // "longitude",
-          // longitude
-        );
+        console.log("position:", position, "title:", title);
         infowindow.setContent(
           '<div style="padding:5px;font-size:12px;">' +
             place.place_name +
@@ -106,17 +101,17 @@ const Map = ({ searchPlace }) => {
         );
         infowindow.open(map, marker);
       });
-    }
+    };
   }, [searchPlace]);
 
   // 지도 및 검색 결과 렌더링
   return (
-    <div>
+    <SMap>
       <div
         id="myMap"
         style={{
-          width: "500px",
-          height: "500px",
+          width: "1000px",
+          height: "800px",
         }}
       ></div>
       <div id="result-list">
@@ -139,7 +134,7 @@ const Map = ({ searchPlace }) => {
         ))}
         <div id="pagination"></div>
       </div>
-    </div>
+    </SMap>
   );
 };
 

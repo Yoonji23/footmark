@@ -27,6 +27,7 @@ const Map = ({ searchPlace }) => {
     const map = new kakao.maps.Map(container, options);
     // 사용자가 검색어를 입력한 경우 장소 객체를 생성하고 키워드 검색을 수행합니다.
     const ps = new kakao.maps.services.Places();
+    console.log("ps:", ps);
 
     // 키워드 검색을 위한 콜백 기능
     const placesSearchCB = (data, status, pagination) => {

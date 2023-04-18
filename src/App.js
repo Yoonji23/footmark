@@ -1,6 +1,7 @@
 import "./App.css";
-import LandingPage from "./LandingPage";
-import Calendar from "./Calendar";
+import "./Calendar.css";
+import LandingPage from "./components/LandingPage";
+import Calendar from "./components/Calendar";
 function App() {
   return (
     <div>

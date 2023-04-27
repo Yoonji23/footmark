@@ -12,12 +12,17 @@ const SLogoTitle = styled.p`
 const SLoginBtn = styled.button`
   width: 65px;
   height: 30px;
-  margin-left: 80%;
   margin-right: 20px;
 `;
 const SSingUpBtn = styled.button`
   width: 65px;
   height: 30px;
+`;
+const SSearchBar = styled.input`
+  width: 467px;
+  height: 44px;
+  align-items: center;
+  margin: 0px;
 `;
 
 const Header = () => {
@@ -25,6 +30,7 @@ const Header = () => {
     <SHeaderContainer>
       <Logo />
       <SLogoTitle>Foot-Mark</SLogoTitle>
+      <SSearchBar></SSearchBar>
       <SLoginBtn>로그인</SLoginBtn>
       <SSingUpBtn>회원가입</SSingUpBtn>
     </SHeaderContainer>

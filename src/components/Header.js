@@ -1,5 +1,7 @@
 import { ReactComponent as Logo } from "../image/Logo.svg";
 import styled from "styled-components";
+import Category from "../components/Category";
+import { useNavigate } from "react-router-dom";
 
 const SHeaderContainer = styled.div`
   display: flex;
@@ -26,9 +28,10 @@ const SSearchBar = styled.input`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <SHeaderContainer>
-      <Logo />
+      <Logo onClick={() => navigate("/")} />
       <SLogoTitle>Foot-Mark</SLogoTitle>
       <SSearchBar></SSearchBar>
       <SLoginBtn>로그인</SLoginBtn>

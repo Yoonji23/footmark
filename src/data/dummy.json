@@ -1,0 +1,31 @@
+{
+  "dataList": [
+    {
+      "id": 1,
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUq9GAc9h0Pbox_cxinUFnRAPOGFP5WIIBgg&usqp=CAU",
+      "title": "한옥 데이트 다녀왔어요~",
+      "content": "추천할 만한 데이트 장소는 아님.",
+      "course": "익선동 한옥거리-익선다방-인생네컷-노래방",
+      "like": "27",
+      "interest": "3"
+    },
+    {
+      "id": 2,
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUq9GAc9h0Pbox_cxinUFnRAPOGFP5WIIBgg&usqp=CAU",
+      "title": "한옥 데이트 다녀왔어요~",
+      "content": "추천할 만한 데이트 장소는 아님.",
+      "course": "익선동 한옥거리-익선다방-인생네컷-노래방",
+      "like": "27",
+      "interest": "3"
+    },
+    {
+      "id": 3,
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUq9GAc9h0Pbox_cxinUFnRAPOGFP5WIIBgg&usqp=CAU",
+      "title": "한옥 데이트 다녀왔어요~",
+      "content": "추천할 만한 데이트 장소는 아님.",
+      "course": "익선동 한옥거리-익선다방-인생네컷-노래방",
+      "like": "27",
+      "interest": "3"
+    }
+  ]
+}

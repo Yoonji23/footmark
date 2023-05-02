@@ -7,11 +7,8 @@ const Calendar = ({ localeDate }) => {
   const calendarRef = useRef(null);
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [data, setDate] = useState();
-  //현재 날짜 구하기
-  // const now = new Date().toLocaleDateString();
-  // console.log("now:", now.toLocaleDateString());
+
   const handleEventAdd = (eventAddInfo) => {
-    console.log("add", eventAddInfo);
     setCalendarEvents([...calendarEvents, eventAddInfo.event]);
   };
 

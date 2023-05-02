@@ -11,7 +11,7 @@ const Main = () => {
     <div>
       {dummy.dataList.map((date) => (
         <SDateBox key={date.id}>
-          <img src={date.img}></img>
+          <img src={date.img} alt="dateImg"></img>
           <div>{date.title}</div>
           <div>{date.content}</div>
           <div>{date.course}</div>
